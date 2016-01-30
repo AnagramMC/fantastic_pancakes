@@ -3,17 +3,17 @@
 #pragma once
 
 #include "BehaviorTree/Services/BTService_BlackboardBase.h"
-#include "GGJ16_AI_CheckDistanceService.generated.h"
+#include "GGJ16_RangedDistService.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class FANTASTIC_PANCAKES_API UGGJ16_AI_CheckDistanceService : public UBTService_BlackboardBase
+class FANTASTIC_PANCAKES_API UGGJ16_RangedDistService : public UBTService_BlackboardBase
 {
 	GENERATED_BODY()
 	
-public:
+	public:
 	UPROPERTY(EditAnywhere)
 	FName TargetName;
 
@@ -24,4 +24,6 @@ protected:
 	virtual void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 
 	float Distance = 0.f;
+	
+	
 };

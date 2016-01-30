@@ -3,10 +3,10 @@
 #include "fantastic_pancakes.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
 #include "Player/GGJ16_Player.h"
-#include "GGJ16_AI/GGJ16_AIController.h"
-#include "GGJ16_AI_CheckDistanceService.h"
+#include "Enemy/GGJ16_BaseController.h"
+#include "GGJ16_RangedDistService.h"
 
-void UGGJ16_AI_CheckDistanceService::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
+void UGGJ16_RangedDistService::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 
@@ -15,15 +15,20 @@ void UGGJ16_AI_CheckDistanceService::TickNode(UBehaviorTreeComponent& OwnerComp,
 	//UObject* TargetObject = Blackboard->GetValue<UBlackboardKeyType_Object>(TargetName);
 
 	AActor* PlayerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
-	
-	AGGJ16_AIController* AIController = Cast<AGGJ16_AIController>(Blackboard->GetOwner());
 
-	if (AIController && PlayerCharacter)
+	AGGJ16_BaseController* AIController = Cast<AGGJ16_BaseController>(Blackboard->GetOwner());
+
+	if (AIController)
 	{
-		Distance = FVector::Dist(PlayerCharacter->GetActorLocation(), AIController->GetPawn()->GetActorLocation());
+		if (PlayerCharacter)
+		{
+			Distance = FVector::Dist(PlayerCharacter->GetActorLocation(), AIController->GetPawn()->GetActorLocation());
 
-		Blackboard->SetValue<UBlackboardKeyType_Float>(BlackboardKey.GetSelectedKeyID(), Distance);
+			Blackboard->SetValue<UBlackboardKeyType_Float>(BlackboardKey.GetSelectedKeyID(), Distance);
+		}
 	}
 
 	GEngine->AddOnScreenDebugMessage(4, 1, FColor::Blue, TEXT("Ding"));
 }
+
+

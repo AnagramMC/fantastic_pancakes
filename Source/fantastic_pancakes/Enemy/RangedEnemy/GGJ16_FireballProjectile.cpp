@@ -19,8 +19,8 @@ AGGJ16_FireballProjectile::AGGJ16_FireballProjectile()
 
 	Projectile = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileComp"));
 	Projectile->UpdatedComponent = Collider;
-	Projectile->InitialSpeed = 6000.f;
-	Projectile->MaxSpeed = 6000.f;
+	Projectile->InitialSpeed = 100.f;
+	Projectile->MaxSpeed = 400.f;
 	Projectile->bRotationFollowsVelocity = true;
 	Projectile->bShouldBounce = false;
 
