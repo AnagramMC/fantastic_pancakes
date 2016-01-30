@@ -25,6 +25,8 @@ EBTNodeResult::Type UFireProjectileAtPlayer::ExecuteTask(UBehaviorTreeComponent&
 			return EBTNodeResult::Succeeded;
 		}
 
+		GEngine->AddOnScreenDebugMessage(3, 1, FColor::Black, TEXT("FUCK"));
+
 		return EBTNodeResult::Failed;
 	}
 
