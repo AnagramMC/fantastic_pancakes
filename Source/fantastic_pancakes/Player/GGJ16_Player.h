@@ -5,6 +5,7 @@
 #include "GameFramework/Character.h"
 #include "Interact/BaseInteract.h"
 #include "Interact/Volcano.h"
+#include "Interact/InteractPlatform.h"
 #include "GGJ16_Player.generated.h"
 
 UCLASS()

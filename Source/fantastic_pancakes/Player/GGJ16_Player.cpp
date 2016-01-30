@@ -55,13 +55,14 @@ void AGGJ16_Player::Tick( float DeltaTime )
 		if (curInteractObject)
 		{
 			AVolcano* curVolcanoInteract = Cast<AVolcano>(curInteractObject);
+			AInteractPlatform* curPlatformInteract = Cast<AInteractPlatform>(curInteractObject);
 			if (curVolcanoInteract)
 			{
 				bCanInteract = true;
 			}
-			else
+			else if (curPlatformInteract)
 			{
-				bCanInteract = false;
+				bCanInteract = true;
 			}
 		}
 		else
@@ -117,6 +118,29 @@ void AGGJ16_Player::Attack()
 
 void AGGJ16_Player::Interact()
 {
+	if (bCanInteract)
+	{
+		TArray<AActor*> OverlappingActors;
+		InteractSense->GetOverlappingActors(OverlappingActors);
+
+		for (AActor* CollidedActor : OverlappingActors)
+		{
+			ABaseInteract* curInteractObject = Cast<ABaseInteract>(CollidedActor);
+			if (curInteractObject)
+			{
+				AVolcano* curVolcanoInteract = Cast<AVolcano>(curInteractObject);
+				AInteractPlatform* curPlatformInteract = Cast<AInteractPlatform>(curInteractObject);
+				if (curVolcanoInteract)
+				{
+					curVolcanoInteract->InteractEvent();
+				}
+				else if (curPlatformInteract)
+				{
+					curPlatformInteract->InteractEvent();
+				}
+			}
+		}
+	}
 	
 	//Run interact function on object in range.
 }
