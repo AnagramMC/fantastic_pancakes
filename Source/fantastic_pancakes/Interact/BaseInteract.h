@@ -23,7 +23,9 @@ public:
 	virtual void InteractEvent();
 
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UBoxComponent* InteractArea;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UStaticMeshComponent* InteractMesh;
 	
 };

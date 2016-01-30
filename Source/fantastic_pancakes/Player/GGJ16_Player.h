@@ -45,6 +45,11 @@ protected:
 	void Interact();
 
 	FRotator CalculateTargetRotation();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float RotationAlpha;
+
+	
 	
 	
 };
