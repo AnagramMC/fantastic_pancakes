@@ -19,6 +19,8 @@ public:
 	AGGJ16_AIController();
 	virtual void Possess(APawn* Pawn) override;
 
+	UBlackboardComponent* GetBlackboardComponent() { return BlackboardComponent; }
+
 protected:
 	UPROPERTY(VisibleAnywhere)
 		UBehaviorTreeComponent* BehaviorTreeComponent;
