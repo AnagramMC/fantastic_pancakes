@@ -30,6 +30,15 @@ void AGGJ16_Player::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+	float Movement = 0.f;
+
+	if (CurrentInputRotation.X != 0 || CurrentInputRotation.Y != 0)
+	{
+		Movement = 1.f;
+	}
+
+	AddMovementInput(GetActorForwardVector(), Movement);
+
 }
 
 // Called to bind functionality to input
@@ -40,23 +49,47 @@ void AGGJ16_Player::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("Forward", this, &AGGJ16_Player::MoveForward);
 	InputComponent->BindAxis("Right", this, &AGGJ16_Player::MoveRight);
 
+	InputComponent->BindAction("Attack", IE_Pressed, this, &AGGJ16_Player::Attack);
+	InputComponent->BindAction("Interact", IE_Pressed, this, &AGGJ16_Player::Interact);
+
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 
 }
 
 void AGGJ16_Player::MoveForward(float Value)
 {
-	if (Value != 0.0f)
-	{
-		AddMovementInput(GetActorForwardVector(), Value);
-	}
+	CurrentInputRotation.X = Value;
+	CalculateTargetRotation();
 }
 
 void AGGJ16_Player::MoveRight(float Value)
 {
-	if (Value != 0.0f)
-	{
-		AddMovementInput(GetActorRightVector(), Value);
-	}
+	CurrentInputRotation.Y = Value;
+	CalculateTargetRotation();
 
+}
+
+FRotator AGGJ16_Player::CalculateTargetRotation()
+{
+	float Yaw = FMath::RadiansToDegrees(FMath::Atan2(CurrentInputRotation.Y, CurrentInputRotation.X));
+	SetActorRotation(FRotator(0.f, Yaw, 0.f));
+
+	return GetActorRotation();
+
+}
+
+void AGGJ16_Player::Attack()
+{
+	TArray<AActor*> OverlappingActors;
+
+	GetOverlappingActors(OverlappingActors, AActor::StaticClass());
+	if (OverlappingActors.Num() != 0)
+	{
+		//Check if is enemy and do damage
+	}
+}
+
+void AGGJ16_Player::Interact()
+{
+	//Run interact function on object in range.
 }
