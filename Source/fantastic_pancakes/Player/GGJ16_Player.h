@@ -3,6 +3,8 @@
 #pragma once
 
 #include "GameFramework/Character.h"
+#include "Interact/BaseInteract.h"
+#include "Interact/Volcano.h"
 #include "GGJ16_Player.generated.h"
 
 UCLASS()
@@ -23,6 +25,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+
+public:
+	bool bIsAttacking = false;
+
 protected:
 
 	UPROPERTY(EditDefaultsOnly)
@@ -30,6 +36,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	UCameraComponent* Camera;
+
+	UPROPERTY(EditDefaultsOnly)
+	UBoxComponent* InteractSense;
 
 	UPROPERTY(EditDefaultsOnly)
 	UBoxComponent* MeleeCollider;

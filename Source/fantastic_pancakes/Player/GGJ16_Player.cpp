@@ -16,6 +16,12 @@ AGGJ16_Player::AGGJ16_Player()
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->AttachTo(CameraBoom);
 
+	InteractSense = CreateDefaultSubobject<UBoxComponent>(TEXT("InteractSense"));
+	InteractSense->AttachTo(RootComponent);
+
+	MeleeCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("MeleeCollider"));
+	MeleeCollider->AttachTo(RootComponent);
+
 }
 
 // Called when the game starts or when spawned
@@ -35,6 +41,7 @@ void AGGJ16_Player::Tick( float DeltaTime )
 	if (CurrentInputRotation.X != 0 || CurrentInputRotation.Y != 0)
 	{
 		Movement = 1.f;
+		CalculateTargetRotation();
 	}
 
 	AddMovementInput(GetActorForwardVector(), Movement);
@@ -60,21 +67,17 @@ void AGGJ16_Player::SetupPlayerInputComponent(class UInputComponent* InputCompon
 void AGGJ16_Player::MoveForward(float Value)
 {
 	CurrentInputRotation.X = Value;
-	CalculateTargetRotation();
 }
 
 void AGGJ16_Player::MoveRight(float Value)
 {
 	CurrentInputRotation.Y = Value;
-	CalculateTargetRotation();
-
 }
 
 FRotator AGGJ16_Player::CalculateTargetRotation()
 {
 	float Yaw = FMath::RadiansToDegrees(FMath::Atan2(CurrentInputRotation.Y, CurrentInputRotation.X));
 	SetActorRotation(FMath::Lerp(GetActorRotation(), FRotator(0.f, Yaw, 0.f), RotationAlpha));
-
 	return GetActorRotation();
 
 }
@@ -83,8 +86,8 @@ void AGGJ16_Player::Attack()
 {
 	TArray<AActor*> OverlappingActors;
 
-	GetOverlappingActors(OverlappingActors, AActor::StaticClass());
-	if (OverlappingActors.Num() != 0)
+	MeleeCollider->GetOverlappingActors(OverlappingActors);
+	for (AActor* CollidedActor : OverlappingActors)
 	{
 		//Check if is enemy and do damage
 	}
@@ -92,5 +95,20 @@ void AGGJ16_Player::Attack()
 
 void AGGJ16_Player::Interact()
 {
+	TArray<AActor*> OverlappingActors;
+	InteractSense->GetOverlappingActors(OverlappingActors);
+
+	for (AActor* CollidedActor : OverlappingActors)
+	{
+		ABaseInteract* curInteractObject = Cast<ABaseInteract>(CollidedActor);
+		if (curInteractObject)
+		{
+			AVolcano* curVolcanoInteract = Cast<AVolcano>(curInteractObject);
+			if (curVolcanoInteract)
+			{
+				GEngine->AddOnScreenDebugMessage(4, 1.5, FColor::Red, TEXT("Volcano Interact"));
+			}
+		}
+	}
 	//Run interact function on object in range.
 }
