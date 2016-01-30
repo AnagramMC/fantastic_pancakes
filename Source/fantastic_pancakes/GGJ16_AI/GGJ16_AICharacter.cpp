@@ -14,11 +14,6 @@ AGGJ16_AICharacter::AGGJ16_AICharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	AIControllerClass = AGGJ16_AIController::StaticClass();
 
-	Collider = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Collider"));
-	Collider->BodyInstance.SetCollisionProfileName("AIAttack");
-
-	RootComponent = Collider;
-
 	PawnSensingComponent = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComponent"));
 
 	OnActorBeginOverlap.AddDynamic(this, &AGGJ16_AICharacter::OnOverlapBegin);

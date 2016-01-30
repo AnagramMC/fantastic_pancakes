@@ -22,9 +22,6 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	UBehaviorTree* BehaviorTree;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Collider)
-		UCapsuleComponent* Collider;
-
 protected:
 	
 	UPROPERTY(VisibleAnywhere)
