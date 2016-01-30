@@ -29,6 +29,9 @@ public:
 public:
 	bool bIsAttacking = false;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool bCanInteract = false;
+
 protected:
 
 	UPROPERTY(EditDefaultsOnly)

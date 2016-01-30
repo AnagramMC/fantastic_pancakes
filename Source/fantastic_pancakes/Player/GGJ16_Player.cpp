@@ -46,7 +46,29 @@ void AGGJ16_Player::Tick( float DeltaTime )
 
 	AddMovementInput(GetActorForwardVector(), Movement);
 	
+	TArray<AActor*> OverlappingActors;
+	InteractSense->GetOverlappingActors(OverlappingActors);
 
+	for (AActor* CollidedActor : OverlappingActors)
+	{
+		ABaseInteract* curInteractObject = Cast<ABaseInteract>(CollidedActor);
+		if (curInteractObject)
+		{
+			AVolcano* curVolcanoInteract = Cast<AVolcano>(curInteractObject);
+			if (curVolcanoInteract)
+			{
+				bCanInteract = true;
+			}
+			else
+			{
+				bCanInteract = false;
+			}
+		}
+		else
+		{
+			bCanInteract = false;
+		}
+	}
 }
 
 // Called to bind functionality to input
@@ -95,20 +117,6 @@ void AGGJ16_Player::Attack()
 
 void AGGJ16_Player::Interact()
 {
-	TArray<AActor*> OverlappingActors;
-	InteractSense->GetOverlappingActors(OverlappingActors);
-
-	for (AActor* CollidedActor : OverlappingActors)
-	{
-		ABaseInteract* curInteractObject = Cast<ABaseInteract>(CollidedActor);
-		if (curInteractObject)
-		{
-			AVolcano* curVolcanoInteract = Cast<AVolcano>(curInteractObject);
-			if (curVolcanoInteract)
-			{
-				GEngine->AddOnScreenDebugMessage(4, 1.5, FColor::Red, TEXT("Volcano Interact"));
-			}
-		}
-	}
+	
 	//Run interact function on object in range.
 }
