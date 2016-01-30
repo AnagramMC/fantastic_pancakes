@@ -40,8 +40,9 @@ protected:
 
 
 	void MoveForward(float Value);
-
 	void MoveRight(float Value);
+	void Attack();
+	void Interact();
 
 	FRotator CalculateTargetRotation();
 	

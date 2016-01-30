@@ -39,10 +39,6 @@ void AGGJ16_Player::Tick( float DeltaTime )
 
 	AddMovementInput(GetActorForwardVector(), Movement);
 
-	GEngine->AddOnScreenDebugMessage(1, 1, FColor::Red, FString::Printf(TEXT("Current Rotation X: %f"), CurrentInputRotation.X));
-	GEngine->AddOnScreenDebugMessage(2, 1, FColor::Red, FString::Printf(TEXT("Current Rotation Y: %f"), CurrentInputRotation.Y));
-	GEngine->AddOnScreenDebugMessage(3, 1, FColor::Red, FString::Printf(TEXT("Current Rotation Z: %f"), CurrentInputRotation.Z));
-
 }
 
 // Called to bind functionality to input
@@ -52,6 +48,9 @@ void AGGJ16_Player::SetupPlayerInputComponent(class UInputComponent* InputCompon
 
 	InputComponent->BindAxis("Forward", this, &AGGJ16_Player::MoveForward);
 	InputComponent->BindAxis("Right", this, &AGGJ16_Player::MoveRight);
+
+	InputComponent->BindAction("Attack", IE_Pressed, this, &AGGJ16_Player::Attack);
+	InputComponent->BindAction("Interact", IE_Pressed, this, &AGGJ16_Player::Interact);
 
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 
@@ -77,4 +76,20 @@ FRotator AGGJ16_Player::CalculateTargetRotation()
 
 	return GetActorRotation();
 
+}
+
+void AGGJ16_Player::Attack()
+{
+	TArray<AActor*> OverlappingActors;
+
+	GetOverlappingActors(OverlappingActors, AActor::StaticClass());
+	if (OverlappingActors.Num() != 0)
+	{
+		//Check if is enemy and do damage
+	}
+}
+
+void AGGJ16_Player::Interact()
+{
+	//Run interact function on object in range.
 }
