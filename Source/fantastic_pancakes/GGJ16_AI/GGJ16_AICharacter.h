@@ -18,17 +18,24 @@ public:
 	// Sets default values for this character's properties
 	AGGJ16_AICharacter();
 
+	//Set up a pointer to hold the behavior tree for the class
 	UPROPERTY(EditDefaultsOnly)
-		UBehaviorTree* BehaviorTree;
+	UBehaviorTree* BehaviorTree;
 
 protected:
 
+	
 	UPROPERTY(VisibleAnywhere)
-		UPawnSensingComponent* PawnSensingComponent;
+	UPawnSensingComponent* PawnSensingComponent;
+
+	//Create two FNames (Basically text fields) that will allow us to set the keys that the values will be stored in on the blackboard
+	UPROPERTY(EditAnywhere)
+	FName GhostActorKeyName;
 
 	UPROPERTY(EditAnywhere)
-		FName GhostActorKeyName;
+	FName PlayerKeyName;
 
+	//Set up the On See Player function (Same vien as On Actor Overlap)
 	UFUNCTION()
-		void OnSeePlayer(APawn* Pawn);
+	void OnSeePlayer(APawn* Pawn);
 };

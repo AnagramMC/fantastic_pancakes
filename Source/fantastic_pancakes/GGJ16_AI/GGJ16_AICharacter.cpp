@@ -3,7 +3,8 @@
 #include "fantastic_pancakes.h"
 #include "GGJ16_AIController.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
-#include "GGJ16_AI/GGJ16_Vani/GGJ16_AI_Vani.h"
+#include "GGJ16_Vani/GGJ16_Vani.h"
+#include "Player/GGJ16_Player.h"
 #include "GGJ16_AICharacter.h"
 
 // Sets default values
@@ -20,6 +21,7 @@ void AGGJ16_AICharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	//Add dynamic the same way we would with actor overlap
 	if (PawnSensingComponent)
 	{
 		PawnSensingComponent->OnSeePawn.AddDynamic(this, &AGGJ16_AICharacter::OnSeePlayer);
@@ -28,7 +30,7 @@ void AGGJ16_AICharacter::BeginPlay()
 
 void AGGJ16_AICharacter::OnSeePlayer(APawn* Pawn)
 {
-	GEngine->AddOnScreenDebugMessage(1, 1.f, FColor::Yellow, TEXT("Ghost seen"));
+	GEngine->AddOnScreenDebugMessage(1, 1.f, FColor::Yellow, TEXT("Something seen"));
 
 	float Distance = FVector::Dist(Pawn->GetActorLocation(), this->GetActorLocation());
 
@@ -38,16 +40,20 @@ void AGGJ16_AICharacter::OnSeePlayer(APawn* Pawn)
 
 		if (Controller)
 		{
-			AGGJ16_AI_Vani* Vani = Cast<AGGJ16_AI_Vani>(Pawn);
+			//Here we check which of the things we saw. This lets us decide what the monster should do and who he should chase. The Ghost has a higher priority so he will always go for the ghost first.
+			AGGJ16_Vani* Vani = Cast<AGGJ16_Vani>(Pawn);
+			AGGJ16_Player* Player = Cast<AGGJ16_Player>(Pawn);
 
 			if (Vani)
 			{
-				Controller->GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(GhostActorKeyName, Vani);
+				Controller->GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(GhostActorKeyName, Pawn);
 				GEngine->AddOnScreenDebugMessage(2, 1.f, FColor::Yellow, TEXT("Ghost set"));
 			}
-
-			/*Controller->GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(GhostActorKeyName, Pawn);
-			GEngine->AddOnScreenDebugMessage(2, 1.f, FColor::Yellow, TEXT("Ghost set"));*/
+			else if (Player)
+			{
+				Controller->GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(PlayerKeyName, Pawn);
+				GEngine->AddOnScreenDebugMessage(2, 1.f, FColor::Yellow, TEXT("Player set"));
+			}
 		}
 	}
 }

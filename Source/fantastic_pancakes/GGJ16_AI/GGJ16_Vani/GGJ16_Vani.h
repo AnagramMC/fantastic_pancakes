@@ -2,17 +2,17 @@
 
 #pragma once
 
-#include "GameFramework/Pawn.h"
-#include "GGJ16_AI_Vani.generated.h"
+#include "GameFramework/Character.h"
+#include "GGJ16_Vani.generated.h"
 
 UCLASS()
-class FANTASTIC_PANCAKES_API AGGJ16_AI_Vani : public APawn
+class FANTASTIC_PANCAKES_API AGGJ16_Vani : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
-	AGGJ16_AI_Vani();
+	// Sets default values for this character's properties
+	AGGJ16_Vani();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
