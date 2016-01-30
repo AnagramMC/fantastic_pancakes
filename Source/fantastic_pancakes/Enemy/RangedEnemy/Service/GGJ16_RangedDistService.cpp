@@ -14,9 +14,16 @@ void UGGJ16_RangedDistService::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 
 	//UObject* TargetObject = Blackboard->GetValue<UBlackboardKeyType_Object>(TargetName);
 
-	AActor* PlayerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+	AActor* BaseActor = UGameplayStatics::GetPlayerCharacter(GetWorld(), 1);
 
 	AGGJ16_BaseController* AIController = Cast<AGGJ16_BaseController>(Blackboard->GetOwner());
+
+	AGGJ16_Player* PlayerCharacter = NULL;
+	
+	if (BaseActor)
+	{
+		PlayerCharacter = Cast<AGGJ16_Player>(BaseActor);
+	}
 
 	if (AIController)
 	{
