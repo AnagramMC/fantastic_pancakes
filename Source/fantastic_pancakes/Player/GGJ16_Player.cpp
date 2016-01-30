@@ -38,7 +38,7 @@ void AGGJ16_Player::Tick( float DeltaTime )
 	}
 
 	AddMovementInput(GetActorForwardVector(), Movement);
-	SetActorRotation(FMath::Lerp(GetActorRotation(), CalculateTargetRotation(), RotationAlpha));
+	
 
 }
 
@@ -73,7 +73,7 @@ void AGGJ16_Player::MoveRight(float Value)
 FRotator AGGJ16_Player::CalculateTargetRotation()
 {
 	float Yaw = FMath::RadiansToDegrees(FMath::Atan2(CurrentInputRotation.Y, CurrentInputRotation.X));
-	//SetActorRotation(FRotator(0.f, Yaw, 0.f));
+	SetActorRotation(FMath::Lerp(GetActorRotation(), FRotator(0.f, Yaw, 0.f), RotationAlpha));
 
 	return GetActorRotation();
 
