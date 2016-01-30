@@ -3,16 +3,16 @@
 #pragma once
 
 #include "GameFramework/Character.h"
-#include "GGJ16_Player.generated.h"
+#include "RitualGamePlayer.generated.h"
 
 UCLASS()
-class FANTASTIC_PANCAKES_API AGGJ16_Player : public ACharacter
+class FANTASTIC_PANCAKES_API ARitualGamePlayer : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	AGGJ16_Player();
+	ARitualGamePlayer();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -23,27 +23,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
-protected:
-
-	UPROPERTY(EditDefaultsOnly)
-	USpringArmComponent* CameraBoom;
-
-	UPROPERTY(EditDefaultsOnly)
-	UCameraComponent* Camera;
-
-	UPROPERTY(EditDefaultsOnly)
-	UBoxComponent* MeleeCollider;
-
-	FVector CurrentInputRotation;
-
-protected:
-
-
-	void MoveForward(float Value);
-
-	void MoveRight(float Value);
-
-	FRotator CalculateTargetRotation();
 	
 	
 };

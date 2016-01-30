@@ -30,6 +30,19 @@ void AGGJ16_Player::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+	float Movement = 0.f;
+
+	if (CurrentInputRotation.X != 0 || CurrentInputRotation.Y != 0)
+	{
+		Movement = 1.f;
+	}
+
+	AddMovementInput(GetActorForwardVector(), Movement);
+
+	GEngine->AddOnScreenDebugMessage(1, 1, FColor::Red, FString::Printf(TEXT("Current Rotation X: %f"), CurrentInputRotation.X));
+	GEngine->AddOnScreenDebugMessage(2, 1, FColor::Red, FString::Printf(TEXT("Current Rotation Y: %f"), CurrentInputRotation.Y));
+	GEngine->AddOnScreenDebugMessage(3, 1, FColor::Red, FString::Printf(TEXT("Current Rotation Z: %f"), CurrentInputRotation.Z));
+
 }
 
 // Called to bind functionality to input
@@ -46,17 +59,22 @@ void AGGJ16_Player::SetupPlayerInputComponent(class UInputComponent* InputCompon
 
 void AGGJ16_Player::MoveForward(float Value)
 {
-	if (Value != 0.0f)
-	{
-		AddMovementInput(GetActorForwardVector(), Value);
-	}
+	CurrentInputRotation.X = Value;
+	CalculateTargetRotation();
 }
 
 void AGGJ16_Player::MoveRight(float Value)
 {
-	if (Value != 0.0f)
-	{
-		AddMovementInput(GetActorRightVector(), Value);
-	}
+	CurrentInputRotation.Y = Value;
+	CalculateTargetRotation();
+
+}
+
+FRotator AGGJ16_Player::CalculateTargetRotation()
+{
+	float Yaw = FMath::RadiansToDegrees(FMath::Atan2(CurrentInputRotation.Y, CurrentInputRotation.X));
+	SetActorRotation(FRotator(0.f, Yaw, 0.f));
+
+	return GetActorRotation();
 
 }
