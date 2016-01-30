@@ -14,7 +14,14 @@ AGGJ16_AICharacter::AGGJ16_AICharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	AIControllerClass = AGGJ16_AIController::StaticClass();
 
+	Collider = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Collider"));
+	Collider->BodyInstance.SetCollisionProfileName("AIAttack");
+
+	RootComponent = Collider;
+
 	PawnSensingComponent = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComponent"));
+
+	OnActorBeginOverlap.AddDynamic(this, &AGGJ16_AICharacter::OnOverlapBegin);
 }
 
 void AGGJ16_AICharacter::BeginPlay()
@@ -55,6 +62,16 @@ void AGGJ16_AICharacter::OnSeePlayer(APawn* Pawn)
 				GEngine->AddOnScreenDebugMessage(2, 1.f, FColor::Yellow, TEXT("Player set"));
 			}
 		}
+	}
+}
+
+void AGGJ16_AICharacter::OnOverlapBegin(class AActor* OtherActor)
+{
+	if (OtherActor && (OtherActor != this))
+	{
+		UGameplayStatics::ApplyDamage(OtherActor, 10.f, GetController(), this, UDamageType::StaticClass());
+
+		GEngine->AddOnScreenDebugMessage(3, 1.f, FColor::Red, TEXT("Something damaged"));
 	}
 }
 

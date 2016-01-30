@@ -22,8 +22,10 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	UBehaviorTree* BehaviorTree;
 
-protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Collider)
+		UCapsuleComponent* Collider;
 
+protected:
 	
 	UPROPERTY(VisibleAnywhere)
 	UPawnSensingComponent* PawnSensingComponent;
@@ -38,4 +40,7 @@ protected:
 	//Set up the On See Player function (Same vien as On Actor Overlap)
 	UFUNCTION()
 	void OnSeePlayer(APawn* Pawn);
+
+	UFUNCTION()
+	virtual void OnOverlapBegin(class AActor* OtherActor);
 };
