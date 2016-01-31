@@ -2,6 +2,7 @@
 
 #include "fantastic_pancakes.h"
 #include "Volcano.h"
+#include "Player/GGJ16_Player.h"
 
 AVolcano::AVolcano()
 {
@@ -33,14 +34,18 @@ void AVolcano::Tick(float DeltaTime)
 
 void AVolcano::InteractEvent()
 {
-		UWorld* const World = GetWorld();
+	UWorld* const World = GetWorld();
 
-	
-			if (World != NULL)
+	AGGJ16_Player* playerReferenece = Cast<AGGJ16_Player>(UGameplayStatics::GetPlayerPawn(World, 0));
+		
+	if (World != NULL)
+	{
+		if (playerReferenece)
+		{
+			if (playerReferenece->VaniCount <= 0)
 			{
 				VaniReference = World->SpawnActor<AGGJ16_Vani>(VaniClass, SpawnPoint, FRotator::ZeroRotator);
-
-				
+				playerReferenece->VaniCount++;
 
 				if ((TimerHandle.IsValid() == false) || (bTimerExpired))
 				{
@@ -48,14 +53,20 @@ void AVolcano::InteractEvent()
 					bTimerExpired = false;
 				}
 			}
-		
-			
-	
+		}
+	}
 }
 
 void AVolcano::TimerExpired()
 {
+	AGGJ16_Player* playerReferenece = Cast<AGGJ16_Player>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+
 	GetWorld()->DestroyActor(VaniReference);
+	if (playerReferenece)
+	{
+		playerReferenece->VaniCount--;
+	}
+
 	GetWorld()->ForceGarbageCollection(true);
 	bTimerExpired = true;
 	

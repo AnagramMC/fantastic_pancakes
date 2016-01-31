@@ -53,7 +53,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		float KnockBackAlpha;
 
-	float VaniCount;
+	float VaniCount = 0;
 
 protected:
 
