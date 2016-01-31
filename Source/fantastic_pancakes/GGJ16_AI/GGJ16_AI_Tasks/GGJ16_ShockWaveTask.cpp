@@ -2,6 +2,7 @@
 
 #include "fantastic_pancakes.h"
 #include "GGJ16_AI/GGJ16_AICharacter.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "GGJ16_ShockWaveTask.h"
 
 EBTNodeResult::Type UGGJ16_ShockWaveTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
@@ -18,6 +19,25 @@ EBTNodeResult::Type UGGJ16_ShockWaveTask::ExecuteTask(UBehaviorTreeComponent& Ow
 
 		if (BossEnemy)
 		{
+
+			AActor* Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+
+			AController* AiController = Cast<AController>(OwnerComp.GetOwner());
+
+			FRotator NewRot = UKismetMathLibrary::FindLookAtRotation(AiController->GetPawn()->GetActorLocation(), Player->GetActorLocation());
+
+			NewRot.Roll = 0.f;
+			NewRot.Pitch = 0.f;
+
+			//NewRot.Yaw += -90;
+
+			AiController->GetPawn()->SetActorRotation(NewRot);
+
+
+			BossEnemy->FireProjectile();
+
+			GEngine->AddOnScreenDebugMessage(3, 1, FColor::Black, OwnerComp.GetOwner()->GetName());
+
 			BossEnemy->FireProjectile();
 			GEngine->AddOnScreenDebugMessage(3, 1, FColor::Black, TEXT("FUCK"));
 			return EBTNodeResult::Succeeded;
