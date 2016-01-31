@@ -13,6 +13,8 @@ class FANTASTIC_PANCAKES_API AGGJ16_BaseController : public AAIController
 {
 	GENERATED_BODY()
 
+public:
+
 	UBlackboardComponent* GetBlackboardComponent() { return BlackboardComponent; }
 
 protected:

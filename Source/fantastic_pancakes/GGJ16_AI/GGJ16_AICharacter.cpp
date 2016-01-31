@@ -28,6 +28,8 @@ void AGGJ16_AICharacter::BeginPlay()
 	{
 		PawnSensingComponent->OnSeePawn.AddDynamic(this, &AGGJ16_AICharacter::OnSeePlayer);
 	}
+
+	FirstEncounter = true;
 }
 
 void AGGJ16_AICharacter::OnSeePlayer(APawn* Pawn)
@@ -55,6 +57,13 @@ void AGGJ16_AICharacter::OnSeePlayer(APawn* Pawn)
 			{
 				Controller->GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(PlayerKeyName, Pawn);
 				GEngine->AddOnScreenDebugMessage(2, 1.f, FColor::Yellow, TEXT("Player set"));
+
+				if (FirstEncounter)
+				{
+					UGameplayStatics::PlaySoundAtLocation(GetWorld(), RoarSound, this->GetActorLocation());
+					FirstEncounter = false;
+				}
+				
 			}
 		}
 	}

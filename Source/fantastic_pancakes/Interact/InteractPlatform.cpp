@@ -13,6 +13,8 @@ void AInteractPlatform::BeginPlay()
 {
 	Super::BeginPlay();
 
+	bTimerExpired = true;
+
 }
 
 // Called every frame
@@ -24,5 +26,21 @@ void AInteractPlatform::Tick(float DeltaTime)
 
 void AInteractPlatform::InteractEvent()
 {
-	bPlatformActive = true;
+	UWorld* const World = GetWorld();
+	if (World != NULL)
+	{
+		bPlatformActive = true;
+
+		if ((TimerHandle.IsValid() == false) || (bTimerExpired))
+		{
+			World->GetTimerManager().SetTimer(TimerHandle, this, &AInteractPlatform::TimerExpired, 3.5f);
+			bTimerExpired = false;
+		}
+	}
+}
+
+void AInteractPlatform::TimerExpired()
+{
+	bPlatformActive = false;
+	bTimerExpired = true;
 }
