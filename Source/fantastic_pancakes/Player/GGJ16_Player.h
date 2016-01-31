@@ -6,6 +6,7 @@
 #include "Interact/BaseInteract.h"
 #include "Interact/Volcano.h"
 #include "Interact/InteractPlatform.h"
+#include "PlayerAnimInstance.h"
 #include "GGJ16_Player.generated.h"
 
 UCLASS()
@@ -26,12 +27,24 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+	UFUNCTION(BlueprintCallable, Category = "JumpHack")
+	void AddJump();
+
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bIsAttacking = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsJumping = false;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool bCanInteract = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool bJumpStart = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPlayerAnimInstance* AnimInstance;
 
 protected:
 
@@ -56,6 +69,7 @@ protected:
 	void MoveRight(float Value);
 	void Attack();
 	void Interact();
+	void Jump();
 
 	FRotator CalculateTargetRotation();
 

@@ -21,7 +21,8 @@ AGGJ16_Player::AGGJ16_Player()
 
 	MeleeCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("MeleeCollider"));
 	MeleeCollider->AttachTo(RootComponent);
-
+	
+	AnimInstance = Cast<UPlayerAnimInstance>(GetMesh()->GetAnimInstance());
 }
 
 // Called when the game starts or when spawned
@@ -83,7 +84,7 @@ void AGGJ16_Player::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAction("Attack", IE_Pressed, this, &AGGJ16_Player::Attack);
 	InputComponent->BindAction("Interact", IE_Pressed, this, &AGGJ16_Player::Interact);
 
-	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	InputComponent->BindAction("Jump", IE_Pressed, this, &AGGJ16_Player::Jump);
 
 }
 
@@ -107,6 +108,7 @@ FRotator AGGJ16_Player::CalculateTargetRotation()
 
 void AGGJ16_Player::Attack()
 {
+	bIsAttacking = true;
 	TArray<AActor*> OverlappingActors;
 
 	MeleeCollider->GetOverlappingActors(OverlappingActors);
@@ -115,6 +117,17 @@ void AGGJ16_Player::Attack()
 		//Check if is enemy and do damage
 	}
 }
+
+void AGGJ16_Player::Jump()
+{
+	bIsJumping = true;
+}
+
+void AGGJ16_Player::AddJump()
+{
+	ACharacter::Jump();
+}
+
 
 void AGGJ16_Player::Interact()
 {
