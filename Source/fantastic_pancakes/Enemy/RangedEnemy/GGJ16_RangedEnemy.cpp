@@ -9,19 +9,14 @@ void AGGJ16_RangedEnemy::EnemyInteract(AActor* Interactor)
 	//
 }
 
-void AGGJ16_RangedEnemy::Tick(float DeltaSeconds)
-{
-	Super::Tick(DeltaSeconds);
-
-	SpawnRotation = GetControlRotation() + ProjectilePitch;
-	// MuzzleOffset is in camera space, so transform it to world space before offsetting from the character location to find the final muzzle position
-	SpawnLocation = GetActorLocation() + ProjectileOffset;
-}
-
 void AGGJ16_RangedEnemy::FireProjectile()
 {
 	if (ProjectileClass != NULL)
 	{
+		const FRotator SpawnRotation = GetControlRotation() + ProjectilePitch;
+		// MuzzleOffset is in camera space, so transform it to world space before offsetting from the character location to find the final muzzle position
+		const FVector SpawnLocation = GetActorLocation() + ProjectileOffset;
+
 		UWorld* const World = GetWorld();
 		if (World != NULL)
 		{
