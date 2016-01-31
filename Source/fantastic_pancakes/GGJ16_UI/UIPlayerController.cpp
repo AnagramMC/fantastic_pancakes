@@ -15,7 +15,7 @@ void AUIPlayerController::Tick(float DeltaTime)
 		SetPause(true);
 	}
 
-	if (APlayerController::WasInputKeyJustPressed(EKeys::W))
+	if (APlayerController::WasInputKeyJustPressed(EKeys::Y))
 	{
 		AUIPlayerController::WinMenu();
 		SetPause(true);
