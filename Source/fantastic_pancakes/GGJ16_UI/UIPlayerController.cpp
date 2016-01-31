@@ -9,6 +9,18 @@ void AUIPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (APlayerController::WasInputKeyJustPressed(EKeys::K))
+	{
+		AUIPlayerController::LoseScreen();
+		SetPause(true);
+	}
+
+	if (APlayerController::WasInputKeyJustPressed(EKeys::W))
+	{
+		AUIPlayerController::WinScreen();
+		SetPause(true);
+	}
+
 	if (APlayerController::WasInputKeyJustPressed(EKeys::P))
 	{
 		AUIPlayerController::PauseMenu();
@@ -21,7 +33,10 @@ void AUIPlayerController::Tick(float DeltaTime)
 		
 		if (PlayerCharacter)
 		{
-			
+			if (PlayerCharacter->isDead)
+			{
+				AUIPlayerController::LoseMenu();
+			}
 		}
 	}
 
