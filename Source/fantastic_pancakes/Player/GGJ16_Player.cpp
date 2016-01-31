@@ -22,9 +22,6 @@ AGGJ16_Player::AGGJ16_Player()
 	MeleeCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("MeleeCollider"));
 	MeleeCollider->AttachTo(RootComponent);
 
-	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponMesh"));
-	WeaponMesh->AttachTo(RootComponent);
-	
 	AnimInstance = Cast<UPlayerAnimInstance>(GetMesh()->GetAnimInstance());
 }
 
@@ -114,7 +111,14 @@ FRotator AGGJ16_Player::CalculateTargetRotation()
 
 void AGGJ16_Player::Attack()
 {
-	bIsAttacking = true;
+	if (!bIsJumping && !bIsAttacking)
+	{
+		bIsAttacking = true;
+	}
+}
+
+void AGGJ16_Player::CheckCollision()
+{
 	TArray<AActor*> OverlappingActors;
 
 	MeleeCollider->GetOverlappingActors(OverlappingActors);
@@ -126,7 +130,10 @@ void AGGJ16_Player::Attack()
 
 void AGGJ16_Player::Jump()
 {
-	bIsJumping = true;
+	if (!bIsJumping && !bIsAttacking)
+	{
+		bIsJumping = true;
+	}
 }
 
 void AGGJ16_Player::AddJump()

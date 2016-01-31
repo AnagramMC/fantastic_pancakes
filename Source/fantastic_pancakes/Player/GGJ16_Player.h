@@ -31,6 +31,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "JumpHack")
 	void AddJump();
 
+	UFUNCTION(BlueprintCallable, Category = "CollsionCheck")
+		void CheckCollision();
+
 	UFUNCTION(BlueprintCallable, Category = "KnockbackAmount")
 		void KnockbackPlayer(float KnockBackAmount);
 
@@ -68,10 +71,6 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	UBoxComponent* MeleeCollider;
-
-	UPROPERTY(EditDefaultsOnly)
-	UStaticMeshComponent* WeaponMesh;
-
 
 	FVector CurrentInputRotation;
 
