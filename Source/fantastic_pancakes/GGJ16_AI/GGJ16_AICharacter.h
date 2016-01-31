@@ -48,10 +48,17 @@ protected:
 	UPROPERTY(EditAnywhere)
 	FName PlayerKeyName;
 
+	UPROPERTY(EditDefaultsOnly)
+	USoundCue* RoarSound;
+
 	//Set up the On See Player function (Same vien as On Actor Overlap)
 	UFUNCTION()
 	void OnSeePlayer(APawn* Pawn);
 
 	UFUNCTION()
 	virtual void OnOverlapBegin(class AActor* OtherActor);
+
+private:
+
+	bool FirstEncounter;
 };
