@@ -10,7 +10,7 @@ AGGJ16_FireballProjectile::AGGJ16_FireballProjectile()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	Collider = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComp"));
+	Collider = CreateDefaultSubobject<UBoxComponent>(TEXT("CapsuleComp"));
 	Collider->BodyInstance.SetCollisionProfileName("Projectile");
 	Collider->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
 	Collider->CanCharacterStepUpOn = ECB_No;

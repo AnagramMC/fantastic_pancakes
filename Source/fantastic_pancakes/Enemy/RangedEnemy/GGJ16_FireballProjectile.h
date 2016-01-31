@@ -23,8 +23,8 @@ private:
 
 protected:
 
-	UPROPERTY(EditDefaultsOnly)
-	UCapsuleComponent* Collider;	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UBoxComponent* Collider;	
 
 	UFUNCTION()
 	virtual void OnActorOverlap(AActor* OtherActor);
