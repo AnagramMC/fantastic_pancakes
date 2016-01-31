@@ -39,7 +39,7 @@ void AGGJ16_AICharacter::Tick(float DeltaTime)
 
 	if (InteractCounter > 4)
 	{
-		Destroy();
+		SetLifeSpan(1.0f);
 	}
 
 }

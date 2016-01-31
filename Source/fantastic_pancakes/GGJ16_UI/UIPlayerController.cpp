@@ -31,7 +31,10 @@ void AUIPlayerController::Tick(float DeltaTime)
 
 		if (EnemyCharacter)
 		{
-
+			if (EnemyCharacter->InteractCounter > 4)
+			{
+				AUIPlayerController::WinMenu();
+			}
 		}
 	}
 }
@@ -47,6 +50,42 @@ void AUIPlayerController::PauseMenu()
 			MyPauseMenu->AddToViewport(0);
 			FInputModeUIOnly Mode;
 			Mode.SetWidgetToFocus(MyPauseMenu->GetCachedWidget());
+			SetInputMode(Mode);
+		}
+
+		bShowMouseCursor = true;
+	}
+}
+
+void AUIPlayerController::WinMenu()
+{
+	if (wWinMenu)
+	{
+		MyWinMenu = CreateWidget<UUserWidget>(this, wWinMenu);
+
+		if (MyWinMenu)
+		{
+			MyWinMenu->AddToViewport(0);
+			FInputModeUIOnly Mode;
+			Mode.SetWidgetToFocus(MyWinMenu->GetCachedWidget());
+			SetInputMode(Mode);
+		}
+
+		bShowMouseCursor = true;
+	}
+}
+
+void AUIPlayerController::LoseMenu()
+{
+	if (wLoseMenu)
+	{
+		MyLoseMenu = CreateWidget<UUserWidget>(this, wLoseMenu);
+
+		if (MyLoseMenu)
+		{
+			MyLoseMenu->AddToViewport(0);
+			FInputModeUIOnly Mode;
+			Mode.SetWidgetToFocus(MyLoseMenu->GetCachedWidget());
 			SetInputMode(Mode);
 		}
 
