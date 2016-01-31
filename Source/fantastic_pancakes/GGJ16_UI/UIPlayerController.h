@@ -3,7 +3,6 @@
 #pragma once
 
 #include "GameFramework/PlayerController.h"
-#include "Player/GGJ16_Player.h"
 #include "Blueprint/UserWidget.h"
 #include "UIPlayerController.generated.h"
 
@@ -19,10 +18,20 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 	TSubclassOf<UUserWidget> wPauseMenu;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
+		TSubclassOf<UUserWidget> wWinMenu;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
+		TSubclassOf<UUserWidget> wLoseMenu;
+
 protected:
 	UUserWidget* MyPauseMenu;
+	UUserWidget* MyWinMenu;
+	UUserWidget* MyLoseMenu;
 
 	virtual void Tick(float DeltaSeconds) override;
 
 	void PauseMenu();
+	void WinMenu();
+	void LoseMenu();
 };
