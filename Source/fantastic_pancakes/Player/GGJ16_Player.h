@@ -46,6 +46,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UPlayerAnimInstance* AnimInstance;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		float KnockBackAlpha;
+
 protected:
 
 	UPROPERTY(EditDefaultsOnly)
@@ -76,7 +79,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float RotationAlpha;
 
-	
-	
+	UFUNCTION(BlueprintCallable, Category = "KnockbackAmount")
+		void KnockbackPlayer(float KnockBackAmount);
 	
 };

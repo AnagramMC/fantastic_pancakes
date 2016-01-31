@@ -157,3 +157,8 @@ void AGGJ16_Player::Interact()
 	
 	//Run interact function on object in range.
 }
+
+void KnockbackPlayer(float KnockBackAmount)
+{
+
+}
