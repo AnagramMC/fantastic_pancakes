@@ -101,7 +101,7 @@ void AGGJ16_Player::MoveRight(float Value)
 FRotator AGGJ16_Player::CalculateTargetRotation()
 {
 	float Yaw = FMath::RadiansToDegrees(FMath::Atan2(CurrentInputRotation.Y, CurrentInputRotation.X));
-	SetActorRotation(FMath::Lerp(GetActorRotation(), FRotator(0.f, Yaw + 45.f, 0.f), RotationAlpha));
+	SetActorRotation(FMath::Lerp(GetActorRotation(), FRotator(0.f, Yaw, 0.f), RotationAlpha));
 	return GetActorRotation();
 
 }
