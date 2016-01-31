@@ -15,6 +15,8 @@ class FANTASTIC_PANCAKES_API AGGJ16_AICharacter : public ACharacter
 
 	virtual void BeginPlay() override;
 
+	virtual void Tick(float DeltaTime) override;
+
 public:
 	// Sets default values for this character's properties
 	AGGJ16_AICharacter();
@@ -35,6 +37,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Rotation)
 		FVector ProjectileOffset;
+
+	uint8 InteractCounter;
 
 protected:
 	
@@ -61,4 +65,5 @@ protected:
 private:
 
 	bool FirstEncounter;
+
 };

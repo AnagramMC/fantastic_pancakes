@@ -24,3 +24,24 @@ void AGGJ16_RangedEnemy::FireProjectile()
 		}
 	}
 }
+
+float AGGJ16_RangedEnemy::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser)
+{
+	const float ActualDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
+	if (ActualDamage > 0.f)
+	{
+		Health -= ActualDamage;
+	}
+
+	if (Health <= 0)
+	{
+		DestroySelf();
+	}
+	
+	return ActualDamage;	
+}
+
+void AGGJ16_RangedEnemy::DestroySelf()
+{
+	Destroy();
+}

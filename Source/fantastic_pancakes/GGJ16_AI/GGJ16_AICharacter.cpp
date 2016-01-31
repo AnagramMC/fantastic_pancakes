@@ -32,6 +32,19 @@ void AGGJ16_AICharacter::BeginPlay()
 	FirstEncounter = true;
 }
 
+
+void AGGJ16_AICharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (InteractCounter > 4)
+	{
+		Destroy();
+	}
+
+}
+
+
 void AGGJ16_AICharacter::OnSeePlayer(APawn* Pawn)
 {
 	GEngine->AddOnScreenDebugMessage(1, 1.f, FColor::Yellow, TEXT("Something seen"));

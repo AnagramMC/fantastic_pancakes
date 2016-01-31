@@ -21,6 +21,12 @@ protected:
 		UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<AGGJ16_FireballProjectile> ProjectileClass;
 
+		UFUNCTION()
+		virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override;
+
+
+		void DestroySelf();
+
 public:
 
 	void FireProjectile();
@@ -29,5 +35,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Rotation)
 		FVector ProjectileOffset;
+
+private:
+
+	uint8 Health = 10;
 	
 };
