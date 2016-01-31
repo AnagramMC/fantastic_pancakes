@@ -34,7 +34,7 @@ void AGGJ16_FireballProjectile::OnActorOverlap(AActor* OtherActor)
 {
 	if (OtherActor != GetOwner())
 	{
-		this->Destroy();
-		OtherActor->Destroy();
+		//this->Destroy();
+		UGameplayStatics::ApplyDamage(OtherActor, 10.f, this->GetInstigatorController(), this, UDamageType::StaticClass());
 	}
 }
