@@ -36,5 +36,7 @@ void AGGJ16_FireballProjectile::OnActorOverlap(AActor* OtherActor)
 	{
 		//this->Destroy();
 		UGameplayStatics::ApplyDamage(OtherActor, 10.f, this->GetInstigatorController(), this, UDamageType::StaticClass());
+
+		OtherActor->SetActorLocation(OtherActor->GetActorLocation() - this->GetActorForwardVector(), true);
 	}
 }
