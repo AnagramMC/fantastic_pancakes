@@ -5,13 +5,19 @@
 
 AVolcano::AVolcano()
 {
-
+	SpawnLocation = CreateDefaultSubobject<USceneComponent>(TEXT("SpawnLocation"));
+	SpawnLocation->AttachTo(RootComponent);
 }
 
 // Called when the game starts or when spawned
 void AVolcano::BeginPlay()
 {
 	Super::BeginPlay();
+
+	
+
+	
+
 
 }
 
@@ -24,5 +30,11 @@ void AVolcano::Tick(float DeltaTime)
 
 void AVolcano::InteractEvent()
 {
+		UWorld* const World = GetWorld();
+
+		if (World != NULL)
+		{
+			World->SpawnActor<AGGJ16_Vani>(Vani, SpawnLocation, FRotator::ZeroRotator);
+		}
 
 }
