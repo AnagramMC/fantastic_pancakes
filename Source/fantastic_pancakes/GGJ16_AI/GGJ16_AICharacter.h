@@ -40,6 +40,8 @@ public:
 
 	uint8 InteractCounter;
 
+	bool bIsDead = false;
+
 protected:
 	
 	UPROPERTY(VisibleAnywhere)

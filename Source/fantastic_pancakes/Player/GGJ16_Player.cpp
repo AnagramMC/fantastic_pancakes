@@ -29,7 +29,6 @@ AGGJ16_Player::AGGJ16_Player()
 void AGGJ16_Player::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -185,7 +184,12 @@ float AGGJ16_Player::TakeDamage(float DamageAmount, struct FDamageEvent const &D
 	if (!bDamaged)
 	{
 		health -= DamageAmount;
-		bDamaged = true;
+		//bDamaged = true;
+	}
+
+	if (health < 0)
+	{
+		isDead = true;
 	}
 
 	if (DamageCauser)
@@ -195,6 +199,7 @@ float AGGJ16_Player::TakeDamage(float DamageAmount, struct FDamageEvent const &D
 		curForwardVector.Normalize();
 		LaunchCharacter(curForwardVector * KnockBackAlpha, true, true);
 	}
+
 	return 0.f;
 	//do the pretty things
 };

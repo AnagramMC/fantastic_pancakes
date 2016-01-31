@@ -35,7 +35,16 @@ float AGGJ16_RangedEnemy::TakeDamage(float Damage, struct FDamageEvent const& Da
 
 	if (Health <= 0)
 	{
-		DestroySelf();
+		if (DamageCauser)
+		{
+			AGGJ16_Player* Player = Cast<AGGJ16_Player>(DamageCauser);
+			if (Player)
+			{
+				Player->killCount++;
+				DestroySelf();
+			}
+		}
+		
 	}
 	
 	return ActualDamage;	

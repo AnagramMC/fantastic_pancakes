@@ -63,6 +63,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		float BaseDamage = 10.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	uint8 killCount = 0;
 
 	float VaniCount = 0;
@@ -100,7 +101,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float RotationAlpha;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float health;
 
 	

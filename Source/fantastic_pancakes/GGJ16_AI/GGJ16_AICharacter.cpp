@@ -86,6 +86,12 @@ void AGGJ16_AICharacter::OnOverlapBegin(class AActor* OtherActor)
 {
 	if (OtherActor && (OtherActor != this))
 	{
+		if (OtherActor->GetName().Contains("Player") && Cast<AGGJ16_Player>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->killCount >= 10)
+		{
+			bIsDead = true;
+			Destroy();
+		}
+
 		UGameplayStatics::ApplyDamage(OtherActor, 10.f, GetController(), this, UDamageType::StaticClass());
 
 		GEngine->AddOnScreenDebugMessage(3, 1.f, FColor::Red, TEXT("Something damaged"));

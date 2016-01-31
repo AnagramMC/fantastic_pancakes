@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Enemy/GGJ16_BaseEnemy.h"
+#include "Player/GGJ16_Player.h"
 #include "Enemy/RangedEnemy/GGJ16_FireballProjectile.h"
 #include "GGJ16_RangedEnemy.generated.h"
 

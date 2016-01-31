@@ -44,12 +44,9 @@ void AUIPlayerController::Tick(float DeltaTime)
 	{
 		AGGJ16_AICharacter* EnemyCharacter = *EnemyItr;
 
-		if (EnemyCharacter)
+		if (!EnemyCharacter)
 		{
-			if (EnemyCharacter->InteractCounter > 4)
-			{
-				AUIPlayerController::WinMenu();
-			}
+			AUIPlayerController::WinMenu();
 		}
 	}
 }
