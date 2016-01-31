@@ -183,5 +183,6 @@ void AGGJ16_Player::KnockbackPlayer(float KnockBackAmount)
 
 float AGGJ16_Player::TakeDamage(float DamageAmount, struct FDamageEvent const &DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
 {
+	return 0.f;
 	//do the pretty things
 };
