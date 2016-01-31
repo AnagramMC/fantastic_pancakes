@@ -21,6 +21,9 @@ AGGJ16_Player::AGGJ16_Player()
 
 	MeleeCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("MeleeCollider"));
 	MeleeCollider->AttachTo(RootComponent);
+
+	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponMesh"));
+	WeaponMesh->AttachTo(RootComponent);
 	
 	AnimInstance = Cast<UPlayerAnimInstance>(GetMesh()->GetAnimInstance());
 }

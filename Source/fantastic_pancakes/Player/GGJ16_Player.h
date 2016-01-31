@@ -69,6 +69,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	UBoxComponent* MeleeCollider;
 
+	UPROPERTY(EditDefaultsOnly)
+	UStaticMeshComponent* WeaponMesh;
+
+
 	FVector CurrentInputRotation;
 
 protected:
