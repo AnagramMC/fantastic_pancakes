@@ -33,7 +33,7 @@ void AInteractPlatform::InteractEvent()
 
 		if ((TimerHandle.IsValid() == false) || (bTimerExpired))
 		{
-			World->GetTimerManager().SetTimer(TimerHandle, this, &AInteractPlatform::TimerExpired, 3.5f);
+			World->GetTimerManager().SetTimer(TimerHandle, this, &AInteractPlatform::TimerExpired, 4.5f);
 			bTimerExpired = false;
 		}
 	}
