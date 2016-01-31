@@ -34,7 +34,7 @@ void AVolcano::InteractEvent()
 
 		if (World != NULL)
 		{
-			World->SpawnActor<AGGJ16_Vani>(Vani, SpawnLocation, FRotator::ZeroRotator);
+			//World->SpawnActor<AGGJ16_Vani>(Vani, SpawnLocation, FRotator::ZeroRotator);
 		}
 
 }
