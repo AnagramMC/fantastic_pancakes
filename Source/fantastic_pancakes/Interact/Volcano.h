@@ -33,7 +33,7 @@ public:
 	
 	virtual void InteractEvent() override;
 
-	//AGGJ16_Vani* VaniReference;
+	AGGJ16_Vani* VaniReference;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USceneComponent* SpawnLocation;
@@ -41,8 +41,15 @@ public:
 	//UPROPERTY(EditDefaultsOnly)
 	//AGGJ16_Vani* Vani;
 	
+	void TimerExpired();
+
+
 private:
-	
+
+	FTimerHandle TimerHandle;
+
+	bool bTimerExpired;
+
 	FVector SpawnPoint;
 	
 };

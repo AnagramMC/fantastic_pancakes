@@ -19,7 +19,7 @@ void AVolcano::BeginPlay()
 	SpawnPoint.Z = this->GetActorLocation().Z + 130.f;
 
 	
-
+	bTimerExpired = true;
 
 }
 
@@ -28,15 +28,35 @@ void AVolcano::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	
 }
 
 void AVolcano::InteractEvent()
 {
 		UWorld* const World = GetWorld();
 
-		if (World != NULL)
-		{
-			World->SpawnActor<AGGJ16_Vani>(VaniClass, SpawnPoint, FRotator::ZeroRotator);
-		}
+	
+			if (World != NULL)
+			{
+				VaniReference = World->SpawnActor<AGGJ16_Vani>(VaniClass, SpawnPoint, FRotator::ZeroRotator);
 
+				
+
+				if ((TimerHandle.IsValid() == false) || (bTimerExpired))
+				{
+					World->GetTimerManager().SetTimer(TimerHandle, this, &AVolcano::TimerExpired, 5.0f);
+					bTimerExpired = false;
+				}
+			}
+		
+			
+	
+}
+
+void AVolcano::TimerExpired()
+{
+	GetWorld()->DestroyActor(VaniReference);
+	GetWorld()->ForceGarbageCollection(true);
+	bTimerExpired = true;
+	
 }
