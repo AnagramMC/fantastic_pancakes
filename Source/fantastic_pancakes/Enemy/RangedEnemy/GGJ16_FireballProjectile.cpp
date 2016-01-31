@@ -19,14 +19,14 @@ AGGJ16_FireballProjectile::AGGJ16_FireballProjectile()
 
 	Projectile = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileComp"));
 	Projectile->UpdatedComponent = Collider;
-	Projectile->InitialSpeed = 100.f;
-	Projectile->MaxSpeed = 400.f;
+	Projectile->InitialSpeed = 1000.f;
+	Projectile->MaxSpeed = 1200.f;
 	Projectile->bRotationFollowsVelocity = true;
 	Projectile->bShouldBounce = false;
 
 	OnActorBeginOverlap.AddDynamic(this, &AGGJ16_FireballProjectile::OnActorOverlap);
 
-	InitialLifeSpan = 60.0f;
+	InitialLifeSpan = 5.0f;
 
 }
 

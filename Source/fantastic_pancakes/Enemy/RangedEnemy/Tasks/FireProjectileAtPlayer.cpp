@@ -13,15 +13,14 @@ EBTNodeResult::Type UFireProjectileAtPlayer::ExecuteTask(UBehaviorTreeComponent&
 		
 	}
 
-	AActor* Enemy = OwnerComp.GetOwner();
-
-	if (Enemy)
+	for (TActorIterator<AGGJ16_RangedEnemy> Enemy(GetWorld()); Enemy; ++Enemy)
 	{
-		AGGJ16_RangedEnemy* RangedEnemy = Cast<AGGJ16_RangedEnemy>(Enemy);
+		AGGJ16_RangedEnemy* RangedEnemy = *Enemy;
 
 		if (RangedEnemy)
 		{
 			RangedEnemy->FireProjectile();
+			GEngine->AddOnScreenDebugMessage(3, 1, FColor::Black, TEXT("FUCK"));
 			return EBTNodeResult::Succeeded;
 		}
 
