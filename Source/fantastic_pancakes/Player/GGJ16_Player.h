@@ -30,6 +30,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "JumpHack")
 	void AddJump();
 
+	UFUNCTION(BlueprintCallable, Category = "KnockbackAmount")
+		void KnockbackPlayer(float KnockBackAmount);
+
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -79,7 +82,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float RotationAlpha;
 
-	UFUNCTION(BlueprintCallable, Category = "KnockbackAmount")
-		void KnockbackPlayer(float KnockBackAmount);
+	
 	
 };
