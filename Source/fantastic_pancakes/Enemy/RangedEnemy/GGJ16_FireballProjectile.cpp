@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "fantastic_pancakes.h"
+#include "Player/GGJ16_Player.h"
 #include "GGJ16_FireballProjectile.h"
 
 
@@ -37,6 +38,8 @@ void AGGJ16_FireballProjectile::OnActorOverlap(AActor* OtherActor)
 		//this->Destroy();
 		UGameplayStatics::ApplyDamage(OtherActor, 10.f, this->GetInstigatorController(), this, UDamageType::StaticClass());
 
-		OtherActor->SetActorLocation(OtherActor->GetActorLocation() - this->GetActorForwardVector(), true);
+		AGGJ16_Player* Player = Cast<AGGJ16_Player>(OtherActor);
+
+		Player->KnockbackPlayer(10.f);
 	}
 }
