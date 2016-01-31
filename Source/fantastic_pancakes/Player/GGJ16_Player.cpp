@@ -124,7 +124,12 @@ void AGGJ16_Player::CheckCollision()
 	MeleeCollider->GetOverlappingActors(OverlappingActors);
 	for (AActor* CollidedActor : OverlappingActors)
 	{
-		//Check if is enemy and do damage
+		AGGJ16_BaseEnemy* curEnemy = Cast<AGGJ16_BaseEnemy>(CollidedActor);
+		if (curEnemy)
+		{
+			didDamage = true;
+			UGameplayStatics::ApplyDamage(curEnemy, BaseDamage, this->GetController(), this, UDamageType::StaticClass());
+		}
 	}
 }
 

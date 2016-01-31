@@ -7,6 +7,7 @@
 #include "Interact/Volcano.h"
 #include "Interact/InteractPlatform.h"
 #include "PlayerAnimInstance.h"
+#include "Enemy/GGJ16_BaseEnemy.h"
 #include "GGJ16_AI/GGJ16_Vani/GGJ16_Vani.h"
 #include "GGJ16_Player.generated.h"
 
@@ -56,7 +57,14 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		float KnockBackAlpha;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		float BaseDamage = 10.f;
+
 	float VaniCount = 0;
+
+	bool isDead = false;
+
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const &DamageEvent, class AController* EventInstigator, AActor* DamageCauser);
 
 protected:
 
@@ -73,6 +81,8 @@ protected:
 	UBoxComponent* MeleeCollider;
 
 	FVector CurrentInputRotation;
+
+	bool didDamage = true;
 
 protected:
 
