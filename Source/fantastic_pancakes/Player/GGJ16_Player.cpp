@@ -63,7 +63,10 @@ void AGGJ16_Player::Tick( float DeltaTime )
 			}
 			else if (curPlatformInteract)
 			{
-				bCanInteract = true;
+				if (!curPlatformInteract->bPlatformActive)
+				{
+					bCanInteract = true;
+				}
 			}
 		}
 		else

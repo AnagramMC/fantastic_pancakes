@@ -7,6 +7,7 @@
 #include "Interact/Volcano.h"
 #include "Interact/InteractPlatform.h"
 #include "PlayerAnimInstance.h"
+#include "GGJ16_AI/GGJ16_Vani/GGJ16_Vani.h"
 #include "GGJ16_Player.generated.h"
 
 UCLASS()
@@ -51,6 +52,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		float KnockBackAlpha;
+
+	float VaniCount;
 
 protected:
 
