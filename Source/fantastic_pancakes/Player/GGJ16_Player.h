@@ -52,6 +52,9 @@ public:
 	bool bJumpStart = false;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool bDamaged = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UPlayerAnimInstance* AnimInstance;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
@@ -59,6 +62,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		float BaseDamage = 10.f;
+
+	uint8 killCount = 0;
 
 	float VaniCount = 0;
 
@@ -85,8 +90,6 @@ protected:
 	bool didDamage = true;
 
 protected:
-
-
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void Attack();
@@ -97,6 +100,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float RotationAlpha;
+
+	float health;
 
 	
 	
