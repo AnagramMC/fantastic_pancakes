@@ -14,7 +14,7 @@ void UGGJ16_AI_CheckDistanceService::TickNode(UBehaviorTreeComponent& OwnerComp,
 
 	UObject* TargetObject = Blackboard->GetValue<UBlackboardKeyType_Object>(TargetName);
 
-	AGGJ16_Player* PlayerCharacter = Cast<AGGJ16_Player>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 1));
+	AGGJ16_Player* PlayerCharacter = Cast<AGGJ16_Player>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 
 	AGGJ16_AIController* AIController = Cast<AGGJ16_AIController>(Blackboard->GetOwner());
 

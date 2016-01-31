@@ -5,6 +5,7 @@
 #include "GameFramework/Character.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "Perception/PawnSensingComponent.h"
+#include "Enemy/RangedEnemy/GGJ16_FireballProjectile.h"
 #include "GGJ16_AICharacter.generated.h"
 
 UCLASS()
@@ -21,6 +22,19 @@ public:
 	//Set up a pointer to hold the behavior tree for the class
 	UPROPERTY(EditDefaultsOnly)
 	UBehaviorTree* BehaviorTree;
+
+	UFUNCTION()
+		void FireProjectile();
+
+	UPROPERTY(EditDefaultsOnly)
+		TSubclassOf<AGGJ16_FireballProjectile> ProjectileClass;
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Rotation)
+		FRotator ProjectilePitch;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Rotation)
+		FVector ProjectileOffset;
 
 protected:
 	
