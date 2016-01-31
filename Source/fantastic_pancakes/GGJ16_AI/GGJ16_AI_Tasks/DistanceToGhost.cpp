@@ -2,11 +2,12 @@
 
 #include "fantastic_pancakes.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
-#include "Player/GGJ16_Player.h"
+#include "GGJ16_AI/GGJ16_Vani/GGJ16_Vani.h"
 #include "GGJ16_AI/GGJ16_AIController.h"
-#include "GGJ16_AI_CheckDistanceService.h"
+#include "DistanceToGhost.h"
 
-void UGGJ16_AI_CheckDistanceService::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
+
+void UDistanceToGhost::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 
@@ -14,13 +15,13 @@ void UGGJ16_AI_CheckDistanceService::TickNode(UBehaviorTreeComponent& OwnerComp,
 
 	UObject* TargetObject = Blackboard->GetValue<UBlackboardKeyType_Object>(TargetName);
 
-	AGGJ16_Player* PlayerCharacter = Cast<AGGJ16_Player>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 1));
-
 	AGGJ16_AIController* AIController = Cast<AGGJ16_AIController>(Blackboard->GetOwner());
 
-	if (AIController && PlayerCharacter)
+	AGGJ16_Vani* VaniCharacter = Cast<AGGJ16_Vani>(TargetObject);
+
+	if (AIController && VaniCharacter)
 	{
-		Distance = FVector::Dist(PlayerCharacter->GetActorLocation(), AIController->GetPawn()->GetActorLocation());
+		Distance = FVector::Dist(VaniCharacter->GetActorLocation(), AIController->GetPawn()->GetActorLocation());
 
 		Blackboard->SetValue<UBlackboardKeyType_Float>(BlackboardKey.GetSelectedKeyID(), Distance);
 	}
