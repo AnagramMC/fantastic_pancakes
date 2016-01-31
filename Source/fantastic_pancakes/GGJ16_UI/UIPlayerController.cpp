@@ -11,13 +11,13 @@ void AUIPlayerController::Tick(float DeltaTime)
 
 	if (APlayerController::WasInputKeyJustPressed(EKeys::K))
 	{
-		AUIPlayerController::LoseScreen();
+		AUIPlayerController::LoseMenu();
 		SetPause(true);
 	}
 
 	if (APlayerController::WasInputKeyJustPressed(EKeys::W))
 	{
-		AUIPlayerController::WinScreen();
+		AUIPlayerController::WinMenu();
 		SetPause(true);
 	}
 
