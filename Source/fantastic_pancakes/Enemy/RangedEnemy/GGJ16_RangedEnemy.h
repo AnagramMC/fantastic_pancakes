@@ -21,6 +21,11 @@ protected:
 		UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<AGGJ16_FireballProjectile> ProjectileClass;
 
+		virtual void Tick(float DeltaSeconds) override;
+
+		FRotator SpawnRotation;
+		FVector SpawnLocation;
+
 public:
 
 	void FireProjectile();
