@@ -15,6 +15,10 @@ class FANTASTIC_PANCAKES_API AVolcano : public ABaseInteract
 {
 	GENERATED_BODY()
 
+protected:
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AGGJ16_Vani> VaniClass;
 
 
 public:
@@ -29,13 +33,16 @@ public:
 	
 	virtual void InteractEvent() override;
 
-	AGGJ16_Vani* VaniReference;
+	//AGGJ16_Vani* VaniReference;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USceneComponent* SpawnLocation;
 
-	UPROPERTY(EditDefaultsOnly)
-	AGGJ16_Vani* Vani;
-
+	//UPROPERTY(EditDefaultsOnly)
+	//AGGJ16_Vani* Vani;
+	
+private:
+	
+	FVector SpawnPoint;
 	
 };

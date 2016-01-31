@@ -14,7 +14,9 @@ void AVolcano::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
+	SpawnPoint.X = this->GetActorLocation().X;
+	SpawnPoint.Y = this->GetActorLocation().Y;
+	SpawnPoint.Z = this->GetActorLocation().Z + 130.f;
 
 	
 
@@ -34,7 +36,7 @@ void AVolcano::InteractEvent()
 
 		if (World != NULL)
 		{
-			//World->SpawnActor<AGGJ16_Vani>(Vani, SpawnLocation, FRotator::ZeroRotator);
+			World->SpawnActor<AGGJ16_Vani>(VaniClass, SpawnPoint, FRotator::ZeroRotator);
 		}
 
 }
