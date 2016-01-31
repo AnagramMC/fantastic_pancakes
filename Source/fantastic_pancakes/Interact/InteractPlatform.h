@@ -26,10 +26,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "InteractEvent")
 	virtual void InteractEvent() override;
 
+	void TimerExpired();
+
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool bPlatformActive = false;
 
+private:
+
+	FTimerHandle TimerHandle;
 	
+	bool bTimerExpired;
 	
 };
