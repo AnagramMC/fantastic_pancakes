@@ -36,7 +36,7 @@ void AGGJ16_AICharacter::OnSeePlayer(APawn* Pawn)
 
 	float Distance = FVector::Dist(Pawn->GetActorLocation(), this->GetActorLocation());
 
-	if (Distance < 900)
+	if (Distance < 5000)
 	{
 		AGGJ16_AIController* Controller = Cast<AGGJ16_AIController>(GetController());
 
