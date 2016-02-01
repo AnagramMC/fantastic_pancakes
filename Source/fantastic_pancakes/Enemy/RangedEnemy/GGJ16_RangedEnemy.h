@@ -16,7 +16,6 @@ class FANTASTIC_PANCAKES_API AGGJ16_RangedEnemy : public AGGJ16_BaseEnemy
 	GENERATED_BODY()
 
 protected:
-
 		virtual void EnemyInteract(AActor* Interact) override;	
 
 		UPROPERTY(EditDefaultsOnly)
@@ -36,6 +35,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Rotation)
 		FVector ProjectileOffset;
+
+	virtual void Tick(float DeltaTime) override;
 
 private:
 

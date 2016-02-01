@@ -1,8 +1,25 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "fantastic_pancakes.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "GGJ16_RangedEnemy.h"
 
+
+void AGGJ16_RangedEnemy::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	AActor* Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+
+	FRotator NewRot = UKismetMathLibrary::FindLookAtRotation(this->GetActorLocation(), Player->GetActorLocation());
+
+	NewRot.Roll = 0.f;
+	NewRot.Pitch = 0.f;
+
+	//NewRot.Yaw += -90;
+
+	this->SetActorRotation(NewRot);
+}
 
 void AGGJ16_RangedEnemy::EnemyInteract(AActor* Interactor)
 {

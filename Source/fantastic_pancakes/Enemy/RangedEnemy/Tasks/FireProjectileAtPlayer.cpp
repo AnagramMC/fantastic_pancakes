@@ -2,7 +2,6 @@
 
 #include "fantastic_pancakes.h"
 #include "Enemy/RangedEnemy/GGJ16_RangedEnemy.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "FireProjectileAtPlayer.h"
 
 
@@ -14,40 +13,19 @@ EBTNodeResult::Type UFireProjectileAtPlayer::ExecuteTask(UBehaviorTreeComponent&
 		
 	}
 
-	for (TActorIterator<AGGJ16_RangedEnemy> Enemy(GetWorld()); Enemy; ++Enemy)
+	AController* Controller = Cast<AController>(OwnerComp.GetOwner());
+
+	AGGJ16_RangedEnemy* Enemy = Cast<AGGJ16_RangedEnemy>(Controller->GetPawn());
+
+	GEngine->AddOnScreenDebugMessage(3, 2.f, FColor::Black, TEXT("Boop"));
+
+	if (Enemy)
 	{
-		AGGJ16_RangedEnemy* RangedEnemy = *Enemy;
-
-		if (RangedEnemy)
-		{
-
-			AActor* Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
-
-			AController* AiController = Cast<AController>(OwnerComp.GetOwner());
-
-			FRotator NewRot = UKismetMathLibrary::FindLookAtRotation(AiController->GetPawn()->GetActorLocation(), Player->GetActorLocation());
-
-			NewRot.Roll = 0.f;
-			NewRot.Pitch = 0.f;
-
-			//NewRot.Yaw += -90;
-
-			AiController->GetPawn()->SetActorRotation(NewRot);
-
-
-			RangedEnemy->FireProjectile();
-			GEngine->AddOnScreenDebugMessage(3, 1, FColor::Black, TEXT("FUCK"));
-			return EBTNodeResult::Succeeded;
-		}
-
+		Enemy->FireProjectile();
 		GEngine->AddOnScreenDebugMessage(3, 1, FColor::Black, TEXT("FUCK"));
-
-		return EBTNodeResult::Failed;
+		return EBTNodeResult::Succeeded;
 	}
 
-
 	return EBTNodeResult::Failed;
-
-
 }
 
