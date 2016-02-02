@@ -68,7 +68,11 @@ public:
 
 	float VaniCount = 0;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool isDead = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool playDeathAnim = false;
 
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const &DamageEvent, class AController* EventInstigator, AActor* DamageCauser);
 

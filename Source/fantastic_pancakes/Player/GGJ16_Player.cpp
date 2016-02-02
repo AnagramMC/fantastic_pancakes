@@ -184,12 +184,15 @@ float AGGJ16_Player::TakeDamage(float DamageAmount, struct FDamageEvent const &D
 	if (!bDamaged)
 	{
 		health -= DamageAmount;
-		//bDamaged = true;
 	}
 
-	if (health < 0)
+	if (health <= 0)
 	{
-		isDead = true;
+		playDeathAnim = true;
+	}
+	else
+	{
+		bDamaged = true;
 	}
 
 	if (DamageCauser)
