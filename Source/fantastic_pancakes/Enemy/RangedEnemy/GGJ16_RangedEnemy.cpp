@@ -11,14 +11,17 @@ void AGGJ16_RangedEnemy::Tick(float DeltaTime)
 
 	AActor* Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 
-	FRotator NewRot = UKismetMathLibrary::FindLookAtRotation(this->GetActorLocation(), Player->GetActorLocation());
+	if (Player)
+	{
+		FRotator NewRot = UKismetMathLibrary::FindLookAtRotation(this->GetActorLocation(), Player->GetActorLocation());
 
-	NewRot.Roll = 0.f;
-	NewRot.Pitch = 0.f;
+		NewRot.Roll = 0.f;
+		NewRot.Pitch = 0.f;
 
-	//NewRot.Yaw += -90;
+		//NewRot.Yaw += -90;
 
-	this->SetActorRotation(NewRot);
+		this->SetActorRotation(NewRot);
+	}
 }
 
 void AGGJ16_RangedEnemy::EnemyInteract(AActor* Interactor)
